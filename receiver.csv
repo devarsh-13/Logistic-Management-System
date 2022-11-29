@@ -1,0 +1,6 @@
+r_gst_no ,r_name ,r_mobileno ,r_emailid ,r_city ,r_state ,r_country ,fk_trans_id ,fk_empId 
+24ADJFH3456L9Z8,Bob,9937456733,bob13@gmail.com,Bhuj,Gujarat,India,20,3
+29HSADE2148V4AR,Tom,8891348199,tom02@gmail.com,Banglore,Karnataka,India,17,2
+27QIBSZ4897X1B0,Dhiraj,7413796399,dhiraj111@gmail.com,Bombay,Maharastra,India,22,5
+24ACVBN7812K9L1,Deep,7632807464,deep67@gmail.com,Ahmedabad,Gujarat,India,16,1
+07EQTYZ7247N4G8,Kishan,6914804810,kishan80@gmail.com,Noida,Delhi,India,19,4

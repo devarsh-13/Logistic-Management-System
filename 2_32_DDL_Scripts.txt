@@ -1,0 +1,132 @@
+CREATE SCHEMA logistics_mngt;
+SET SEARCH_PATH to logistics_mngt;
+CREATE TABLE Department(
+	dept_id INT PRIMARY KEY, 
+	dept_name VARCHAR(30), 
+	dept_desc VARCHAR(50) 
+	
+);
+CREATE TABLE Employee(
+	e_id INT PRIMARY KEY,
+	e_name VARCHAR(30),
+	e_gender VARCHAR(10),
+	e_phoneno VARCHAR(10),
+	e_joindate DATE,
+	e_role VARCHAR(20),
+	e_salary INT,
+	fk_dept_id INT REFERENCES Department(dept_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE TABLE Client(
+	client_gst_no VARCHAR(15) PRIMARY KEY,
+	client_name VARCHAR(30),
+	client_mobileno VARCHAR(10),
+	client_emailid VARCHAR(50),
+	client_city VARCHAR(80),
+	client_state VARCHAR(80),
+	client_country VARCHAR(80),
+	fk_empId INT REFERENCES Employee(e_id) ON DELETE SET DEFAULT ON UPDATE CASCADE
+);
+
+CREATE TABLE Orders(
+	order_id INT PRIMARY KEY,
+	order_name VARCHAR(30),
+	fk_client_gst_no VARCHAR(15) REFERENCES Client(client_gst_no) ON DELETE CASCADE ON UPDATE CASCADE,
+	fk_e_id INT REFERENCES Employee(e_id) ON DELETE SET DEFAULT ON UPDATE CASCADE 
+);
+
+CREATE TABLE Transactions(
+	t_id INT PRIMARY KEY,
+	t_status VARCHAR(15),
+	t_mode VARCHAR(30),
+	t_amount DECIMAL(9,2),
+	t_date DATE,
+	t_time TIME,
+	fk_order_id INT REFERENCES Orders(order_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+CREATE TABLE Transporter(
+	transporter_id INT PRIMARY KEY,
+	transporter_companyname VARCHAR(50),
+	transporter_type VARCHAR(20)		
+);
+
+
+CREATE TABLE Receiver(
+	r_gst_no VARCHAR(15) PRIMARY KEY,
+	r_name VARCHAR(30),
+	r_mobileno VARCHAR(10),
+	r_emailid VARCHAR(50),
+	r_city VARCHAR(80),
+	r_state VARCHAR(80),
+	r_country VARCHAR(80),
+	fk_empId INT REFERENCES Employee(e_id ) 
+	ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Transportation(
+	trans_id INT PRIMARY KEY,
+	source_location VARCHAR(40),
+	pickup_date DATE,
+	pickup_time TIME,
+	destination_location VARCHAR(40),
+	destination_date DATE,
+	destination_time TIME,
+	fk_order_id INT REFERENCES Orders(order_id) ON DELETE CASCADE ON UPDATE CASCADE,
+	fk_transporter_id INT REFERENCES Transporter(transporter_id) ON DELETE CASCADE ON UPDATE CASCADE,
+	fk_r_gst_no VARCHAR(15) REFERENCES Receiver(r_gst_no) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+
+CREATE TABLE RoadTransport(
+	vehicle_no INT PRIMARY KEY,
+	v_name VARCHAR(30),
+	v_loading_capacity INT,
+	purchase_date DATE,
+	fk_transporterId INT REFERENCES Transporter(transporter_id) ON DELETE CASCADE ON UPDATE CASCADE
+	
+);
+
+CREATE TABLE WaterTransport(
+	ship_id INT PRIMARY KEY,
+	purchase_date DATE, 
+	s_name VARCHAR(30),
+	s_loading_capacity INT,
+	crew_size INT,
+	fk_transporterId INT REFERENCES Transporter(transporter_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE AirTransport(
+	Plane_id INT PRIMARY KEY, 
+	purchase_date DATE, 
+	airplane_name VARCHAR(30), 
+	p_loading_capacity INT,
+	fk_transporterId INT REFERENCES Transporter(transporter_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Driver(
+	Driver_id INT PRIMARY KEY,
+	Driver_name VARCHAR(30),
+	Driver_DOB DATE,
+	Driver_mobile VARCHAR(10),
+	fk_vehicleNo INT REFERENCES RoadTransport(vehicle_no) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Captain(
+	captain_id INT PRIMARY KEY,
+	captain_name VARCHAR(30),
+	captain_DOB DATE, 
+	captain_mobile VARCHAR(10),
+	fk_shipId INT REFERENCES WaterTransport(ship_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Pilot(
+	pilot_id INT PRIMARY KEY,
+	pilot_name VARCHAR(30),
+	pilot_DOB DATE,
+	pilot_mobile VARCHAR(10),
+	fk_planeId INT REFERENCES AirTransport(Plane_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+

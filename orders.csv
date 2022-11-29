@@ -1,0 +1,11 @@
+order_id ,order_name ,fk_client_gst_no,fk_e_id 
+2021090021,Steel Transportation,24FGHIJ3456L6O9,3
+2021010022,Bike Transportation,29GTYKL1234K1D5,1
+2021040023,WoodTransportation,27JKLMN7890X2Z4,2
+2021070024,Crane Transportation,24FGHIJ3456L6O9,4
+2021110025,Coal Transportation,08STQVW2345N5V3,5
+2021020026,CNG Transportation,29GTYKL1234K1D5,2
+2021040027,Factory Parts Transportation,08STQVW2345N5V3,1
+2021050028,Sports Items Transportation,27JKLMN7890X2Z4,3
+2021090029,Fruits Transportation,24FGHIJ3456L6O9,5
+2021020030,Wool Transportation,08STQVW2345N5V3,2
